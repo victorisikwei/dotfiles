@@ -3,6 +3,7 @@
 
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.nimble/bin:$PATH
+export PATH=$HOME/.nimble/pkgs2:$PATH
 
 # Path to your Oh My Zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -146,21 +147,5 @@ alias gc='git commit -m'
 alias gp='git push origin master'
 
 #----- FZF stuffs----
-
-# Preview file content using bat (https://github.com/sharkdp/bat)
-export FZF_CTRL_T_OPTS="
-  --walker-skip .git,node_modules,target
-  --preview 'bat -n --color=always {}'
-  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
-
-# CTRL-Y to copy the command into clipboard using pbcopy
-export FZF_CTRL_R_OPTS="
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
-  --color header:italic
-  --header 'Press CTRL-Y to copy command into clipboard'"
-
-
-# Print tree structure in the preview window
-export FZF_ALT_C_OPTS="
-  --walker-skip .git,node_modules,target
-  --preview 'tree -C {}'"
+source <(fzf --zsh)
+alias f='vi "$(fzf)"'
